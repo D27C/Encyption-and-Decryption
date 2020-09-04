@@ -1,0 +1,76 @@
+<html>
+    <head>
+        <style>
+            #EandD{
+                height: 300px;
+                width: 300px;
+                border-width: 1px;
+                border-color: black;
+                margin-top: 100px;
+                margin-left: 480px;
+                background-color: lightblue;
+                border-radius: 1px;
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="EandD">
+            <input type="button" value="Encryption" id="E" onclick="EandD('E')">
+            <input type="button" value="Decryption" id="D" onclick="EandD('D')">
+            <br>
+            <input type="text" readonly id="Output" style="border-color: white;">
+            <br>
+            <div style="display: inline-block;">
+                <input type="text" id="textE" style="display: inline-block;" oninput="MIEE()">
+                <input type="button" value="Copy to clipboard" style="display: inline-block;" onclick="Copy('CO')">
+                <input type="text" id="textD" style="display: inline-block;" oninput="MIED()">
+            </div>
+        </div>
+    </body>
+    <script>
+function copyToClipboard() {
+  var copyText = document.getElementById("Output");
+  copyText.select();
+  copyText.setSelectionRange(0, 99999)
+  document.execCommand("copy");
+}
+document.getElementById("textE").style.display="none"
+document.getElementById("textD").style.display="none"
+document.getElementById("E").style.display="block"
+document.getElementById("D").style.display="block"
+function EandD(a){
+    if(a==="D"){
+        document.getElementById("textE").style.display="none"
+        document.getElementById("textD").style.display="block"
+        document.getElementById("E").style.display="block"
+        document.getElementById("D").style.display="none"
+    }
+    if(a==="E"){
+        document.getElementById("textE").style.display="block"
+        document.getElementById("textD").style.display="none"
+        document.getElementById("E").style.display="none"
+        document.getElementById("D").style.display="block"
+    }
+}
+        function Copy(a){
+            if(a==="CI"){
+                document.getElementById("text").value = document.getElementById("Output").value
+            }
+            if(a==="CO"){
+                copyToClipboard()
+            }
+        }
+        function MIED(){
+            var code = document.getElementById("textD").value
+                document.getElementById("Output").value = shiftCodesD(code)
+        }
+        function MIEE(){
+            var code = document.getElementById("textE").value
+                document.getElementById("Output").value = shiftCodesE(code)
+        }
+
+const shiftCodesE = (s, howMuch) => s.split("").map(c=> String.fromCharCode(c.charCodeAt(0) + 5)).join("");
+const shiftCodesD = (s, howMuch) => s.split("").map(c=> String.fromCharCode(c.charCodeAt(0) - 5)).join("");
+ </script>
+</html>
